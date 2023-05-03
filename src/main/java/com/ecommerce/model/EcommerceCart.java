@@ -15,12 +15,12 @@ public class EcommerceCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cart_id")
     private Long id;
-    @OneToMany
+    @ManyToMany
     @Column(unique = false)
     List<EcommerceProduct> productList;
 
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference("BackReference-Cart-to-User")
     EcommerceUser cartOwner;

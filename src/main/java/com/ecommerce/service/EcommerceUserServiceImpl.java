@@ -1,6 +1,7 @@
 package com.ecommerce.service;
 
 
+import com.ecommerce.exceptions.AccountDoesNotExistException;
 import com.ecommerce.exceptions.AccountExistsException;
 import com.ecommerce.model.EcommerceCredentials;
 import com.ecommerce.model.EcommerceUser;
@@ -36,5 +37,12 @@ public class EcommerceUserServiceImpl implements EcommerceUserService {
             newUser.setPassword(credentials.getPassword());
             return this.ecommerceUserRepository.save(newUser);
         }
+    }
+
+    @Override
+    public EcommerceUser findByUsername(String username) {
+        return this.ecommerceUserRepository.findByUsername(username).orElseThrow(() ->
+                new AccountDoesNotExistException("Cannot add to cart for a user that does not exist")
+        );
     }
 }

@@ -2,7 +2,9 @@ package com.ecommerce.service;
 
 import com.ecommerce.exceptions.CartNotFoundException;
 import com.ecommerce.model.EcommerceCart;
+import com.ecommerce.model.EcommerceCheckout;
 import com.ecommerce.model.EcommerceProduct;
+import com.ecommerce.model.EcommerceUser;
 import com.ecommerce.repository.EcommerceCartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,10 +17,15 @@ import java.util.Optional;
 public class EcommerceCartServiceImpl implements EcommerceCartService {
     private final EcommerceCartRepository ecommerceCartRepository;
     private final EcommerceProductService ecommerceProductService;
+    private final EcommerceUserService ecommerceUserService;
 
 
     @Override
     public EcommerceCart addItemForUser(Long productId, String username) {
+        // : ensure user exists
+
+        EcommerceUser user = this.ecommerceUserService.findByUsername(username);
+
         // : get the current cart owned by the user
 
         // : --- if it does not exist create it
@@ -42,6 +49,7 @@ public class EcommerceCartServiceImpl implements EcommerceCartService {
         }
 
         cart.get().getProductList().add(product);
+        cart.get().setCartOwner(user);
 
         // : save and return the cart
         return this.ecommerceCartRepository.save(cart.get());
@@ -52,5 +60,21 @@ public class EcommerceCartServiceImpl implements EcommerceCartService {
         return this.ecommerceCartRepository.findCartByUsername(username).orElseThrow(() ->
             new CartNotFoundException("The cart does not exist")
         );
+    }
+
+    @Override
+    public EcommerceCheckout checkout(String username) {
+        EcommerceCheckout checkout = new EcommerceCheckout();
+
+        // : get the total of the users cart
+
+        Double total = this.findCartByUsername(username).getProductList()
+                .stream()
+                .map(EcommerceProduct::getPrice)
+                .reduce(Double::sum).orElseGet(() -> 0.00);
+
+        checkout.setTotal(total);
+
+        return checkout;
     }
 }

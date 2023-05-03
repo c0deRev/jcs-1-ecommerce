@@ -7,4 +7,6 @@ public interface EcommerceUserService {
     boolean authenticate(EcommerceCredentials credentials);
 
     EcommerceUser addUser(EcommerceCredentials credentials);
+
+    EcommerceUser findByUsername(String username);
 }

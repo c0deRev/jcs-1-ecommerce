@@ -1,9 +1,6 @@
 package com.ecommerce.controller;
 
-import com.ecommerce.model.EcommerceCart;
-import com.ecommerce.model.EcommerceCredentials;
-import com.ecommerce.model.EcommerceProduct;
-import com.ecommerce.model.EcommerceUser;
+import com.ecommerce.model.*;
 import com.ecommerce.service.EcommerceCartService;
 import com.ecommerce.service.EcommerceProductService;
 import com.ecommerce.service.EcommerceUserService;
@@ -84,6 +81,13 @@ public class EcommerceController {
         // : get and return a cart
         return ResponseEntity.ok(
                 this.ecommerceCartService.findCartByUsername(credentials.getUsername())
+        );
+    }
+
+    @PostMapping("/checkout")
+    public ResponseEntity<EcommerceCheckout> doCheckout(@RequestBody EcommerceCredentials credentials) {
+        return ResponseEntity.ok(
+                this.ecommerceCartService.checkout(credentials.getUsername())
         );
     }
 
