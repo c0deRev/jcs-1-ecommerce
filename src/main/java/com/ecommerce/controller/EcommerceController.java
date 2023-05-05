@@ -1,5 +1,6 @@
 package com.ecommerce.controller;
 
+import com.ecommerce.exceptions.BadCredentialsException;
 import com.ecommerce.model.*;
 import com.ecommerce.service.EcommerceCartService;
 import com.ecommerce.service.EcommerceProductService;
@@ -8,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.security.auth.login.AccountNotFoundException;
 import java.util.List;
 
 @RestController
@@ -20,9 +20,7 @@ public class EcommerceController {
     private final EcommerceCartService ecommerceCartService;
 
     @PostMapping("/login")
-    public ResponseEntity<EcommerceCredentials> doLogin(@RequestBody EcommerceCredentials credentials)
-            throws AccountNotFoundException
-    {
+    public ResponseEntity<EcommerceCredentials> doLogin(@RequestBody EcommerceCredentials credentials) {
         // : check if user/pass matches in database
 
         if (ecommerceUserService.authenticate(credentials)){
@@ -30,14 +28,17 @@ public class EcommerceController {
             credentials.setPassword(null);
             return ResponseEntity.ok(credentials);
         } else {
-            throw new AccountNotFoundException("Username or password is incorrect");
+            throw new BadCredentialsException("Username or password is incorrect");
         }
     }
 
     @PostMapping("/register")
     public ResponseEntity<EcommerceUser> doRegister(@RequestBody EcommerceCredentials credentials){
 
-        EcommerceUser user = this.ecommerceUserService.addUser(credentials);
+        EcommerceUser user = new EcommerceUser().setUsername(credentials.getUsername()).setPassword(credentials.getPassword());
+
+        user = this.ecommerceUserService.addUser(user);
+
         user.setPassword(null);
         return ResponseEntity.ok(user);
     }
