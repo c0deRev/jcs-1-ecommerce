@@ -1,9 +1,6 @@
 package com.ecommerce.controller.advice;
 
-import com.ecommerce.exceptions.AccountNotFoundException;
-import com.ecommerce.exceptions.BadCredentialsException;
-import com.ecommerce.exceptions.CartNotFoundException;
-import com.ecommerce.exceptions.ProductNotFoundException;
+import com.ecommerce.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -22,6 +19,16 @@ public class EcommerceControllerAdvice {
         String responseBody = ex.getMessage();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);
     }
+
+    @ExceptionHandler(value = {
+            AccountExistsException.class
+    })
+    public ResponseEntity<?> handleDuplicateAccount(RuntimeException ex, WebRequest request){
+        ex.printStackTrace();
+        String responseBody = ex.getMessage();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
+    }
+    
     @ExceptionHandler(value = {
             BadCredentialsException.class,
     })
