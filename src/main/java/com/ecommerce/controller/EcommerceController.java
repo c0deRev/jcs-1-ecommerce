@@ -81,18 +81,22 @@ public class EcommerceController {
         );
     }
 
-    @PostMapping("/cart")
-    public ResponseEntity<EcommerceCart> getItemsFromCart(@RequestBody EcommerceCredentials credentials){
+    @GetMapping("/cart")
+    public ResponseEntity<EcommerceCart> getItemsFromCart(){
         // : get and return a cart
+        String username = ((Authentication) SecurityContextHolder.getContext().getAuthentication()).getName();
+
         return ResponseEntity.ok(
-                this.ecommerceCartService.findCartByUsername(credentials.getUsername())
+                this.ecommerceCartService.findCartByUsername(username)
         );
     }
 
-    @PostMapping("/checkout")
-    public ResponseEntity<EcommerceCheckout> doCheckout(@RequestBody EcommerceCredentials credentials) {
+    @GetMapping("/checkout")
+    public ResponseEntity<EcommerceCheckout> doCheckout() {
+        String username = ((Authentication) SecurityContextHolder.getContext().getAuthentication()).getName();
+
         return ResponseEntity.ok(
-                this.ecommerceCartService.checkout(credentials.getUsername())
+                this.ecommerceCartService.checkout(username)
         );
     }
 

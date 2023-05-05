@@ -22,18 +22,21 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/product/all",
                                 "/cart/add/**",
-                                "/checkout"
+                                "/checkout",
+                                "/logout"
                         )
                         .hasRole("USER")
                 )
                 .exceptionHandling()
                 .authenticationEntryPoint((request, response, authException) -> response.setStatus(HttpServletResponse.SC_UNAUTHORIZED))
+                .accessDeniedHandler((request, response, accessDeniedException) -> response.setStatus(HttpServletResponse.SC_FORBIDDEN))
                 .and()
                 .formLogin(config -> config
                         .successHandler((request, response, authentication) -> response.setStatus(HttpServletResponse.SC_ACCEPTED))
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
+                        .logoutSuccessHandler((request, response, authentication) -> response.setStatus(HttpServletResponse.SC_ACCEPTED))
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                 )
