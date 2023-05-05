@@ -19,7 +19,7 @@ public class EcommerceController {
     private final EcommerceProductService ecommerceProductService;
     private final EcommerceCartService ecommerceCartService;
 
-    @PostMapping("/login")
+    @PostMapping("/authenticate")
     public ResponseEntity<EcommerceCredentials> doLogin(@RequestBody EcommerceCredentials credentials) {
         // : check if user/pass matches in database
 

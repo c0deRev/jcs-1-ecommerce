@@ -1,5 +1,6 @@
 package com.ecommerce.security;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,8 +15,19 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests(auth ->
                     auth
-                        .requestMatchers("/register")
+                        .requestMatchers(
+                                "/register"
+                        )
                         .permitAll()
+                        .requestMatchers(
+                                "/product/all",
+                                "/cart/add/**",
+                                "/checkout"
+                        )
+                        .hasRole("USER")
+                )
+                .formLogin(config -> config
+                        .successHandler((request, response, authentication) -> response.setStatus(HttpServletResponse.SC_ACCEPTED))
                 )
                 .csrf((csrf) -> csrf
                         .ignoringRequestMatchers("/**")

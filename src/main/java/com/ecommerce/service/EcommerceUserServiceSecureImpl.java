@@ -3,12 +3,15 @@ package com.ecommerce.service;
 
 import com.ecommerce.exceptions.AccountExistsException;
 import com.ecommerce.exceptions.AccountNotFoundException;
+import com.ecommerce.exceptions.BadCredentialsException;
 import com.ecommerce.model.EcommerceCredentials;
 import com.ecommerce.model.EcommerceUser;
 import com.ecommerce.repository.EcommerceUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -35,9 +38,11 @@ public class EcommerceUserServiceSecureImpl implements EcommerceUserService {
 
     @Override
     public boolean authenticate(EcommerceCredentials credentials) {
-        return ecommerceUserRepository
-                .findByUsernameAndPassword(credentials.getUsername(), credentials.getPassword())
-                .isPresent();
+        SecurityContext context = SecurityContextHolder.getContext();
+        UserDetails userDetails = (UserDetails) context.getAuthentication().getDetails();
+
+        return context.getAuthentication().isAuthenticated()
+                && credentials.getUsername().equals(userDetails.getUsername());
     }
 
     @Override
