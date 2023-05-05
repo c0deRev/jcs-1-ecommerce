@@ -1,5 +1,6 @@
 package com.ecommerce.controller;
 
+import com.ecommerce.annotation.Authenticated;
 import com.ecommerce.exceptions.BadCredentialsException;
 import com.ecommerce.model.*;
 import com.ecommerce.service.EcommerceCartService;
@@ -7,6 +8,9 @@ import com.ecommerce.service.EcommerceProductService;
 import com.ecommerce.service.EcommerceUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -69,11 +73,11 @@ public class EcommerceController {
     }
 
     @PostMapping("/cart/add/{id}")
-    public ResponseEntity<EcommerceCart> addItemToCart(@PathVariable("id") Long productId,
-                                                       @RequestBody EcommerceCredentials credentials){
+    public ResponseEntity<EcommerceCart> addItemToCart(@PathVariable("id") Long productId){
         // : add an item to a users cart
+        String username = ((Authentication) SecurityContextHolder.getContext().getAuthentication()).getName();
         return ResponseEntity.ok(
-                this.ecommerceCartService.addItemForUser(productId, credentials.getUsername())
+                this.ecommerceCartService.addItemForUser(productId, username)
         );
     }
 

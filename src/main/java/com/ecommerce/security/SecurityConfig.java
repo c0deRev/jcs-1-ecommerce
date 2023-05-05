@@ -26,8 +26,16 @@ public class SecurityConfig {
                         )
                         .hasRole("USER")
                 )
+                .exceptionHandling()
+                .authenticationEntryPoint((request, response, authException) -> response.setStatus(HttpServletResponse.SC_UNAUTHORIZED))
+                .and()
                 .formLogin(config -> config
                         .successHandler((request, response, authentication) -> response.setStatus(HttpServletResponse.SC_ACCEPTED))
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
                 )
                 .csrf((csrf) -> csrf
                         .ignoringRequestMatchers("/**")

@@ -38,8 +38,9 @@ public class EcommerceUserServiceSecureImpl implements EcommerceUserService {
 
     @Override
     public boolean authenticate(EcommerceCredentials credentials) {
+
         SecurityContext context = SecurityContextHolder.getContext();
-        UserDetails userDetails = (UserDetails) context.getAuthentication().getDetails();
+        UserDetails userDetails = (UserDetails) context.getAuthentication().getPrincipal();
 
         return context.getAuthentication().isAuthenticated()
                 && credentials.getUsername().equals(userDetails.getUsername());
@@ -63,6 +64,11 @@ public class EcommerceUserServiceSecureImpl implements EcommerceUserService {
                     .build();
 
             ((InMemoryUserDetailsManager) this.userDetailsService).createUser(newUser);
+
+            user.setPassword(this.encoder.encode(user.getPassword()));
+            user.setCart(null);
+
+            this.ecommerceUserRepository.save(user);
 
             return new EcommerceUser().setUsername(user.getUsername()).setPassword(null).setCart(null);
         }
