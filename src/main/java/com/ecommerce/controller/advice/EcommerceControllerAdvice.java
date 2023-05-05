@@ -23,7 +23,7 @@ public class EcommerceControllerAdvice {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);
     }
     @ExceptionHandler(value = {
-            BadCredentialsException.class
+            BadCredentialsException.class,
     })
     public ResponseEntity<?> handleBadCredentials(RuntimeException ex, WebRequest request){
         ex.printStackTrace();
