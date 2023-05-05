@@ -6,7 +6,7 @@ import com.ecommerce.model.EcommerceUser;
 public interface EcommerceUserService {
     boolean authenticate(EcommerceCredentials credentials);
 
-    EcommerceUser addUser(EcommerceCredentials credentials);
+    EcommerceUser addUser(EcommerceUser user);
 
     EcommerceUser findByUsername(String username);
 }

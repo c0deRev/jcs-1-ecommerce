@@ -1,12 +1,14 @@
 package com.ecommerce.service;
 
 
-import com.ecommerce.exceptions.AccountDoesNotExistException;
+import com.ecommerce.exceptions.AccountNotFoundException;
 import com.ecommerce.exceptions.AccountExistsException;
 import com.ecommerce.model.EcommerceCredentials;
 import com.ecommerce.model.EcommerceUser;
 import com.ecommerce.repository.EcommerceUserRepository;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,7 +16,9 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class EcommerceUserServiceImpl implements EcommerceUserService {
-    private final EcommerceUserRepository ecommerceUserRepository;
+
+    @Autowired
+    private EcommerceUserRepository ecommerceUserRepository;
 
     @Override
     public boolean authenticate(EcommerceCredentials credentials) {
@@ -24,25 +28,22 @@ public class EcommerceUserServiceImpl implements EcommerceUserService {
     }
 
     @Override
-    public EcommerceUser addUser(EcommerceCredentials credentials) {
+    public EcommerceUser addUser(EcommerceUser user) {
         // : check if username exists
         Optional<EcommerceUser> lookupUser
-                = this.ecommerceUserRepository.findByUsername(credentials.getUsername());
+                = this.ecommerceUserRepository.findByUsername(user.getUsername());
 
         if (lookupUser.isPresent()){
             throw new AccountExistsException("That username is already registered");
         } else {
-            EcommerceUser newUser = new EcommerceUser();
-            newUser.setUsername(credentials.getUsername());
-            newUser.setPassword(credentials.getPassword());
-            return this.ecommerceUserRepository.save(newUser);
+            return this.ecommerceUserRepository.save(user);
         }
     }
 
     @Override
     public EcommerceUser findByUsername(String username) {
         return this.ecommerceUserRepository.findByUsername(username).orElseThrow(() ->
-                new AccountDoesNotExistException("Cannot add to cart for a user that does not exist")
+                new AccountNotFoundException("Cannot add to cart for a user that does not exist")
         );
     }
 }
