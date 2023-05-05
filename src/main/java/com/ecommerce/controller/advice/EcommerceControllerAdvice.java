@@ -1,11 +1,15 @@
 package com.ecommerce.controller.advice;
 
 import com.ecommerce.exceptions.*;
+import com.ecommerce.model.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+
+import java.sql.Date;
+import java.time.Instant;
 
 @ControllerAdvice
 public class EcommerceControllerAdvice {
@@ -17,7 +21,12 @@ public class EcommerceControllerAdvice {
     public ResponseEntity<?> handleNotFoundException(RuntimeException ex, WebRequest request){
         ex.printStackTrace();
         String responseBody = ex.getMessage();
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);
+        ErrorResponse response = ErrorResponse
+                .builder()
+                .timestamp(Date.from(Instant.now()))
+                .message(responseBody)
+                .build();
+        return new ResponseEntity<ErrorResponse>(response, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(value = {
@@ -26,16 +35,28 @@ public class EcommerceControllerAdvice {
     public ResponseEntity<?> handleDuplicateAccount(RuntimeException ex, WebRequest request){
         ex.printStackTrace();
         String responseBody = ex.getMessage();
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
+        ErrorResponse response = ErrorResponse
+                .builder()
+                .timestamp(Date.from(Instant.now()))
+                .message(responseBody)
+                .build();
+        return new ResponseEntity<ErrorResponse>(response, HttpStatus.BAD_REQUEST);
+
     }
-    
+
     @ExceptionHandler(value = {
             BadCredentialsException.class,
     })
     public ResponseEntity<?> handleBadCredentials(RuntimeException ex, WebRequest request){
         ex.printStackTrace();
         String responseBody = ex.getMessage();
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseBody);
+        ErrorResponse response = ErrorResponse
+                .builder()
+                .timestamp(Date.from(Instant.now()))
+                .message(responseBody)
+                .build();
+        return new ResponseEntity<ErrorResponse>(response, HttpStatus.UNAUTHORIZED);
+
     }
 
 }
