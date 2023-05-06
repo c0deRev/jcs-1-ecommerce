@@ -34,7 +34,7 @@ import static org.springframework.security.test.web.servlet.response.SecurityMoc
         "H2_CONSOLE=true",
         "DDL_AUTO=create-drop"
 })
-public class ControllerIntegratonTests {
+public class EcommerceIntegratonTests {
     @Autowired
     private MockMvc mockMvc;
 
