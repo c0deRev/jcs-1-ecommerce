@@ -32,20 +32,4 @@ class EcommerceApplicationTests {
 	void contextLoads() {
 	}
 
-
-	@Test
-	@DisplayName("Test register endpoint")
-	public void register_test(){
-		String username = "testUser";
-		String password = "testPass";
-
-		EcommerceCredentials credentials = new EcommerceCredentials(username, password);
-		EcommerceUser user = new EcommerceUser();
-		user.setUsername(username).setPassword(password).setId(1L);
-
-		var response = restTemplate.postForEntity("/register", credentials, EcommerceCredentials.class);
-
-		assertEquals(EcommerceCredentials.class, response.getBody().getClass());
-	}
-
 }

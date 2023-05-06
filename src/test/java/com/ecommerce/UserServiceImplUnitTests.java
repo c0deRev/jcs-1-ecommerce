@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @ExtendWith(MockitoExtension.class)
-public class EcommerceServiceTests {
+public class UserServiceImplUnitTests {
 
     @Mock
     private static EcommerceUserRepository ecommerceUserRepository;

@@ -32,6 +32,7 @@ public class SecurityConfig {
                 .accessDeniedHandler((request, response, accessDeniedException) -> response.setStatus(HttpServletResponse.SC_FORBIDDEN))
                 .and()
                 .formLogin(config -> config
+                        .failureHandler((request, response, exception) -> response.setStatus(HttpServletResponse.SC_BAD_REQUEST))
                         .successHandler((request, response, authentication) -> response.setStatus(HttpServletResponse.SC_ACCEPTED))
                 )
                 .logout(logout -> logout
