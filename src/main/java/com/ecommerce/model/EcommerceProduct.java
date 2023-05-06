@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+/**
+ * This entity represents a single product in the products table.
+ */
 @Data
 @Entity
 @Accessors(chain = true)
