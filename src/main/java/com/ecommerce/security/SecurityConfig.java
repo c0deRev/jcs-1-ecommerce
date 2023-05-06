@@ -7,6 +7,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * Controls the main configuration of Spring Security. This class exposes a bean of the type
+ * {@link SecurityFilterChain} that is configured using the {@link HttpSecurity} object.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
