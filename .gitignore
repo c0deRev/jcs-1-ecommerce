@@ -40,7 +40,8 @@ build/
 /bazel-out
 
 # Node
-/node_modules
+/node
+**/node_modules
 npm-debug.log
 yarn-error.log
 
