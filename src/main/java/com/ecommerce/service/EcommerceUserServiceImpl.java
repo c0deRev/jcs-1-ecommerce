@@ -6,9 +6,10 @@ import com.ecommerce.exceptions.AccountExistsException;
 import com.ecommerce.model.EcommerceCredentials;
 import com.ecommerce.model.EcommerceUser;
 import com.ecommerce.repository.EcommerceUserRepository;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -25,6 +26,7 @@ public class EcommerceUserServiceImpl implements EcommerceUserService {
         return ecommerceUserRepository
                 .findByUsernameAndPassword(credentials.getUsername(), credentials.getPassword())
                 .isPresent();
+
     }
 
     @Override

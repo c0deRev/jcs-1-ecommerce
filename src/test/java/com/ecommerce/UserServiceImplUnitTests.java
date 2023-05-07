@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @ExtendWith(MockitoExtension.class)
-public class EcommerceServiceTests {
+public class UserServiceImplUnitTests {
 
     @Mock
     private static EcommerceUserRepository ecommerceUserRepository;
@@ -38,7 +38,7 @@ public class EcommerceServiceTests {
 
     @Test
     @DisplayName("Test Register in EcommerceUserService")
-    public void register_givenUniqueUserPass_whenRegister_returnEcommerceCredentials_on_success(){
+    public void test_givenUniqueUserPass_whenUserServiceAddUser_returnEcommerceCredentials(){
         String username = "testUser";
         String password = "testPass";
 
@@ -56,7 +56,7 @@ public class EcommerceServiceTests {
 
     @Test
     @DisplayName("Test Authentication Success")
-    public void login_givenValidUserPass_whenLogin_returnBooleanTrue() {
+    public void test_givenValidUserPass_whenUserServiceAuthenticate_returnBooleanTrue() {
         String username = "testUser";
         String password = "testPass";
 
