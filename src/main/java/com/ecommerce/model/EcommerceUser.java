@@ -6,6 +6,9 @@ import lombok.experimental.Accessors;
 
 import java.util.Objects;
 
+/**
+ * Entity that represents application data for a single user.
+ */
 @Data
 @Entity
 @Accessors(chain = true)

@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+/**
+ * This class is used to encapsulate error messages that are sent to the client.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

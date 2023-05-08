@@ -11,6 +11,12 @@ import org.springframework.web.context.request.WebRequest;
 import java.sql.Date;
 import java.time.Instant;
 
+/**
+ * <p>{@link ControllerAdvice} is used to centralize exception handling for the entire application.</p>
+ * <br>
+ * <p>Exceptions thrown in every controller are caught by thy the method level {@link ExceptionHandler}
+ * annotations located within this class.</p>
+ */
 @ControllerAdvice
 public class EcommerceControllerAdvice {
     @ExceptionHandler(value = {

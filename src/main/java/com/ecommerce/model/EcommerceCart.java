@@ -7,6 +7,9 @@ import lombok.experimental.Accessors;
 
 import java.util.List;
 
+/**
+ * This entity represents the cart table
+ */
 @Data
 @Entity
 @Accessors(chain = true)
