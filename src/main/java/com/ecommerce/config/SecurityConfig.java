@@ -1,4 +1,4 @@
-package com.ecommerce.security;
+package com.ecommerce.config;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +20,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth ->
                     auth
                         .requestMatchers(
-                                "/register"
+                                "/register",
+                          "/",
+                          "/*.css",
+                          "/*.js",
+                          "/index.html",
+                          "/favicon.ico"
                         )
                         .permitAll()
                         .requestMatchers(

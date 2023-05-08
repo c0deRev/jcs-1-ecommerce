@@ -84,48 +84,54 @@
 
 
 	</dependencies>
-
-	<build>
-		<finalName>app</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.asciidoctor</groupId>
-				<artifactId>asciidoctor-maven-plugin</artifactId>
-				<version>2.2.1</version>
-				<executions>
-					<execution>
-						<id>generate-docs</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>process-asciidoc</goal>
-						</goals>
-						<configuration>
-							<backend>html</backend>
-							<doctype>book</doctype>
-						</configuration>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.springframework.restdocs</groupId>
-						<artifactId>spring-restdocs-asciidoctor</artifactId>
-						<version>${spring-restdocs.version}</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+        <plugin>
+            <groupId>com.github.eirslett</groupId>
+            <artifactId>frontend-maven-plugin</artifactId>
+            <version>1.9.1</version>
+            <configuration>
+                <nodeVersion>v18.16.0</nodeVersion>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>install-npm</id>
+                    <goals>
+                        <goal>install-node-and-npm</goal>
+                    </goals>
+                </execution>
+                <execution>
+                    <id>npm-install</id>
+                    <goals>
+                        <goal>npm</goal>
+                    </goals>
+                </execution>
+                <execution>
+                    <id>npm-build</id>
+                    <goals>
+                        <goal>npm</goal>
+                    </goals>
+                    <configuration>
+                        <arguments>run-script build</arguments>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>npm-test</id>
+                    <goals>
+                      <goal>npm</goal>
+                    </goals>
+                    <configuration>
+                        <arguments>run-script test</arguments>
+                    </configuration>
+                    <phase>test</phase>
+                </execution>      
+            </executions>
+        </plugin>
+    </plugins>
+</build>
 
 </project>
