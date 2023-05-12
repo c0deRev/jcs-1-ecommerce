@@ -3,14 +3,14 @@
       <form role="form" [formGroup]="loginForm" (ngSubmit)="login()" aria-label="Login Form">
         
         <div *ngIf="loginFormState == 'username'" class="input">
-          <label for="theme-primary-label">USERNAME</label>
-          <input type="text" placeholder="username" formControlName="username" class="theme-primary-input">
+          <label for="input-login-username" class="theme-primary-label">USERNAME</label>
+          <input id="input-login-username" type="text" placeholder="username" formControlName="username" class="theme-primary-input">
           <button class="theme-button-primary" type="button" value="next">next</button>
         </div>
   
         <div *ngIf="loginFormState == 'password'" class="input">
-          <label for="theme-primary-label">PASSWORD</label>
-          <input type="password" placeholder="" formControlName="password" class="theme-primary-input">
+          <label for="input-login-password" class="theme-primary-label">PASSWORD</label>
+          <input id="input-login-password" type="password" placeholder="" formControlName="password" class="theme-primary-input">
           <button class="theme-button-primary" type="button" value="password">login</button>
         </div>
       </form>

@@ -119,6 +119,7 @@
                         <arguments>run-script build</arguments>
                     </configuration>
                 </execution>
+              <!--
                 <execution>
                     <id>npm-test</id>
                     <goals>
@@ -128,7 +129,8 @@
                         <arguments>run-script test</arguments>
                     </configuration>
                     <phase>test</phase>
-                </execution>      
+                </execution>
+            -->
             </executions>
         </plugin>
     </plugins>

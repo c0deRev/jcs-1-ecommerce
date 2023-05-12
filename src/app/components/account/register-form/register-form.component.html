@@ -1,21 +1,49 @@
 <section id="register-container">
     <div id="register-form">
-      <form role="form" [formGroup]="registerForm" (ngSubmit)="register()" aria-label="Register Form">
-        <div *ngIf="registerFormState == 'username'" class="input" class="theme-primary-input">
-          <label for="theme-primary-label">USERNAME</label>
-          <input type="text" placeholder="username" formControlName="username">
+
+      <form 
+        role="form" 
+        [formGroup]="registerForm" 
+        (ngSubmit)="register()" 
+        aria-label="Register Form"
+        >
+
+        <div 
+          *ngIf="registerFormState == 'username'" 
+          class="input"
+          >
+
+          <label 
+            for="input-register-username" 
+            class="theme-primary-label"
+            >
+            USERNAME
+          </label>
+
+          <input 
+            id="input-register-username" 
+            type="text" 
+            placeholder="username" 
+            formControlName="username" 
+            class="theme-primary-input"
+            >
         </div>
-  
+        <button class="theme-button-primary" type="button" value="password">register</button>
+      </form>
+
+        <form role="form" [formGroup]="registerForm" (ngSubmit)="register()" aria-label="Register Form">
         <div *ngIf="registerFormState == 'email'" class="input">
-          <label for="theme-primary-label">EMAIL</label>
-          <input type="email" placeholder="your@email.com" formControlName="email" class="theme-primary-input">
+          <label for="input-register-email" class="theme-primary-label">EMAIL</label>
+          <input id="input-register-email" type="email" placeholder="your@email.com" formControlName="email" class="theme-primary-input">
         </div>
-  
+        <button class="theme-button-primary" type="button" value="password">register</button>
+      </form>
+
+        <form role="form" [formGroup]="registerForm" (ngSubmit)="register()" aria-label="Register Form">
         <div *ngIf="registerFormState == 'password'" class="input">
-          <label for="theme-primary-label">PASSWORD</label>
-          <input type="password" placeholder="" formControlName="password" class="theme-primary-input">
+          <label for="input-register-password" class="theme-primary-label">PASSWORD</label>
+          <input id="input-register-password" type="password" placeholder="" formControlName="password" class="theme-primary-input">
         </div>
-  
         <button class="theme-button-primary" type="button" value="password">register</button>
       </form>
     </div>

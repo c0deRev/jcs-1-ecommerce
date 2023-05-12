@@ -25,7 +25,8 @@ public class SecurityConfig {
                           "/*.css",
                           "/*.js",
                           "/index.html",
-                          "/favicon.ico"
+                          "/favicon.ico",
+                          "/assets/**"
                         )
                         .permitAll()
                         .requestMatchers(
