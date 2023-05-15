@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { ApplicationService } from 'src/app/services/application.service';
 
 type LoginFormState = "username" | "password";
@@ -16,12 +15,15 @@ export class LoginFormComponent {
   
   loginFormState : LoginFormState = "username";
 
-  loginForm = new FormGroup({
-    'username': new FormControl(),
-    'password': new FormControl()
-  })
-
   public login() : void {
-    // TODO: do login
+    throw new Error("not implemented");
+  }
+
+  public submitUsername($event: any) : void {
+    throw new Error("not implemented");
+  }
+
+  public submitPassword($event: any) : void {
+    throw new Error("not implemented");
   }
 }

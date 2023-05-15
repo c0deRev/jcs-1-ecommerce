@@ -1,50 +1,42 @@
 <section id="register-container">
     <div id="register-form">
 
-      <form 
-        role="form" 
-        [formGroup]="registerForm" 
-        (ngSubmit)="register()" 
-        aria-label="Register Form"
-        >
+      <app-form-single-input
+        [shouldShowInput]="registerFormState== 'email'"
+        [buttonName]="'next'"
+        [buttonValue]="'register-email'"
+        [inputPlaceholder]="'email'"
+        [inputType]="'email'"
+        [labelName]="'E-MAIL'"
+        (onSubmit)="submitEmail($event)"
 
-        <div 
-          *ngIf="registerFormState == 'username'" 
-          class="input"
-          >
+      >
+      </app-form-single-input>
 
-          <label 
-            for="input-register-username" 
-            class="theme-primary-label"
-            >
-            USERNAME
-          </label>
 
-          <input 
-            id="input-register-username" 
-            type="text" 
-            placeholder="username" 
-            formControlName="username" 
-            class="theme-primary-input"
-            >
-        </div>
-        <button class="theme-button-primary" type="button" value="password">register</button>
-      </form>
+      <app-form-single-input
+      [shouldShowInput]="registerFormState == 'password'"
+      [buttonName]="'next'"
+      [buttonValue]="'register-password'"
+      [inputPlaceholder]="'password'"
+      [inputType]="'password'"
+      [labelName]="'PASSWORD'"
+      (onSubmit)="submitUsername($event)"
 
-        <form role="form" [formGroup]="registerForm" (ngSubmit)="register()" aria-label="Register Form">
-        <div *ngIf="registerFormState == 'email'" class="input">
-          <label for="input-register-email" class="theme-primary-label">EMAIL</label>
-          <input id="input-register-email" type="email" placeholder="your@email.com" formControlName="email" class="theme-primary-input">
-        </div>
-        <button class="theme-button-primary" type="button" value="password">register</button>
-      </form>
+    >
+    </app-form-single-input>
 
-        <form role="form" [formGroup]="registerForm" (ngSubmit)="register()" aria-label="Register Form">
-        <div *ngIf="registerFormState == 'password'" class="input">
-          <label for="input-register-password" class="theme-primary-label">PASSWORD</label>
-          <input id="input-register-password" type="password" placeholder="" formControlName="password" class="theme-primary-input">
-        </div>
-        <button class="theme-button-primary" type="button" value="password">register</button>
-      </form>
+
+    <app-form-single-input
+    [shouldShowInput]="registerFormState == 'username'"
+    [buttonName]="'register'"
+    [buttonValue]="'register-user'"
+    [inputPlaceholder]="'username'"
+    [inputType]="'text'"
+    [labelName]="'USERNAME'"
+    (onSubmit)="submitUsername($event)"
+
+  >
+  </app-form-single-input>
     </div>
   </section>

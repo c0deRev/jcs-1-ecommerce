@@ -10,6 +10,7 @@ import { TopBarComponent } from './components/top-bar/top-bar/top-bar.component'
 import { ReactiveFormsModule } from '@angular/forms';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { ProductListingComponent } from './pages/product-listing/product-listing.component';
+import { FormSingleInputComponent } from './components/form/form-single-input/form-single-input.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ProductListingComponent } from './pages/product-listing/product-listing
     FooterComponent,
     TopBarComponent,
     LandingPageComponent,
-    ProductListingComponent
+    ProductListingComponent,
+    FormSingleInputComponent
   ],
   imports: [
     BrowserModule,

@@ -1,18 +1,29 @@
 <section id="login-container">
     <div id="login-form">
-      <form role="form" [formGroup]="loginForm" (ngSubmit)="login()" aria-label="Login Form">
-        
-        <div *ngIf="loginFormState == 'username'" class="input">
-          <label for="input-login-username" class="theme-primary-label">USERNAME</label>
-          <input id="input-login-username" type="text" placeholder="username" formControlName="username" class="theme-primary-input">
-          <button class="theme-button-primary" type="button" value="next">next</button>
-        </div>
-  
-        <div *ngIf="loginFormState == 'password'" class="input">
-          <label for="input-login-password" class="theme-primary-label">PASSWORD</label>
-          <input id="input-login-password" type="password" placeholder="" formControlName="password" class="theme-primary-input">
-          <button class="theme-button-primary" type="button" value="password">login</button>
-        </div>
-      </form>
+
+      <app-form-single-input
+        [shouldShowInput]="loginFormState == 'username'"
+        [buttonName]="'next'"
+        [buttonValue]="'login-user'"
+        [inputPlaceholder]="'username'"
+        [inputType]="'text'"
+        [labelName]="'USERNAME'"
+        (onSubmit)="submitUsername($event)"
+
+      >
+      </app-form-single-input>
+
+      <app-form-single-input
+      [shouldShowInput]="loginFormState == 'password'"
+      [buttonName]="'login'"
+      [buttonValue]="'login-password'"
+      [inputPlaceholder]="'password'"
+      [inputType]="'password'"
+      [labelName]="'PASSWORD'"
+      (onSubmit)="submitPassword($event)"
+
+    >
+    </app-form-single-input>
+
     </div>
   </section>

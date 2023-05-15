@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { ApplicationService } from 'src/app/services/application.service';
 
 type RegisterStatus = "username" | "password" | "email";
@@ -17,14 +16,21 @@ export class RegisterFormComponent {
 
   registerFormState : RegisterStatus = "username";
 
-  registerForm = new FormGroup({
-    'username': new FormControl(),
-    'email'   : new FormControl(),
-    'password': new FormControl()
-  })
 
   public register() : void {
     // TODO: Register User
+  }
+
+  public submitUsername($event: any) : void {
+    throw new Error("not implemented");
+  }
+
+  public submitPassword($event: any) : void {
+    throw new Error("not implemented");
+  }
+
+  public submitEmail($event: any) : void {
+    throw new Error("not implemented");
   }
 
 }
