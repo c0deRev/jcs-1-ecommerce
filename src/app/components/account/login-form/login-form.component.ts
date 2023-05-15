@@ -9,21 +9,41 @@ type LoginFormState = "username" | "password";
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent {
+
+
+  public error : boolean = false;
+
+  public loginFormState : LoginFormState = "username";
+
+  private username?: string;
+  private password?: string;
+
   constructor(
     private appService: ApplicationService
   ){}
   
-  loginFormState : LoginFormState = "username";
 
-  public login() : void {
-    throw new Error("not implemented");
+  private login() : void {
+    this.appService.login(this.username!, this.password!, {
+      success: () => {
+        //this.appService.route("products");
+      },
+      failure: () => {
+        this.error = true;
+      }
+    });
+
   }
 
   public submitUsername($event: any) : void {
-    throw new Error("not implemented");
+    this.username = $event.input;
+    this.loginFormState = "password";
   }
 
   public submitPassword($event: any) : void {
-    throw new Error("not implemented");
+    this.password = $event.input;
+
+    this.login();
   }
 }
+
