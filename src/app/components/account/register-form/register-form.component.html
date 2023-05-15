@@ -16,12 +16,12 @@
 
       <app-form-single-input
       [shouldShowInput]="registerFormState == 'password'"
-      [buttonName]="'next'"
+      [buttonName]="'submit'"
       [buttonValue]="'register-password'"
       [inputPlaceholder]="'password'"
       [inputType]="'password'"
       [labelName]="'PASSWORD'"
-      (onSubmit)="submitUsername($event)"
+      (onSubmit)="submitPassword($event)"
 
     >
     </app-form-single-input>
@@ -29,7 +29,7 @@
 
     <app-form-single-input
     [shouldShowInput]="registerFormState == 'username'"
-    [buttonName]="'register'"
+    [buttonName]="'next'"
     [buttonValue]="'register-user'"
     [inputPlaceholder]="'username'"
     [inputType]="'text'"

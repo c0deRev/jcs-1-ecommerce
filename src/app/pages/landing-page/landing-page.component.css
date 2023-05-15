@@ -16,10 +16,6 @@
   margin-bottom: 1em;
 }
 
-.landing-page-form {
-
+#form-swap-button {
+  margin-top: 1em;
 }
-
-  app-register-form {
-    display: none;
-  }

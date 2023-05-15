@@ -26,7 +26,7 @@ export class LoginFormComponent {
   private login() : void {
     this.appService.login(this.username!, this.password!, {
       success: () => {
-        //this.appService.route("products");
+        this.appService.route("product-list");
       },
       failure: () => {
         this.error = true;

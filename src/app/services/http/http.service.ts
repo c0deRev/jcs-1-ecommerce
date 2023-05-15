@@ -14,6 +14,10 @@ export class PostData extends HttpData {
   public setParams(params : HttpParams){
     this.params = params;
   }
+
+  public setData(data: {}){
+    this.data = data;
+  }
 }
 
 export class HttpCallback {
@@ -53,10 +57,10 @@ export class HttpService {
   public post<Type>(postData : PostData, callback : HttpCallback) : void {
 
     const headers   = postData.headers;
-    const params    = postData.params;
+    const params    = postData.params ? postData.params : postData.data;
     const endpoint  = postData.endpoint;
 
-    this.http.post<Type>(endpoint, params,{ headers }).pipe(
+    this.http.post<Type>(endpoint, params, { headers }).pipe(
       tap({
         next: (response) => {
           callback.next && callback.next(response);
@@ -72,6 +76,12 @@ export class HttpService {
 
   public formPost<Type>(postData : PostData, callback : HttpCallback ) : void {
     postData.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+
+    this.post<Type>(postData, callback);
+  }
+
+  public jsonPost<Type>(postData : PostData, callback : HttpCallback ) : void {
+    postData.headers.set('Content-Type', 'application/json');
 
     this.post<Type>(postData, callback);
   }
