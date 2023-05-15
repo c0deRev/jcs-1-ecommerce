@@ -20,19 +20,20 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth ->
                     auth
                         .requestMatchers(
-                                "/register",
+                  "/register",
                           "/",
                           "/*.css",
                           "/*.js",
                           "/index.html",
-                          "/favicon.ico"
+                          "/favicon.ico",
+                          "/assets/**"
                         )
                         .permitAll()
                         .requestMatchers(
-                                "/product/all",
-                                "/cart/add/**",
-                                "/checkout",
-                                "/logout"
+                          "/product/all",
+                          "/cart/add/**",
+                          "/checkout",
+                          "/logout"
                         )
                         .hasRole("USER")
                 )
@@ -50,7 +51,7 @@ public class SecurityConfig {
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                 )
-                .csrf((csrf) -> csrf
+                .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/**")
                 ).build();
     }
