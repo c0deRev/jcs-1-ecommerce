@@ -18,4 +18,16 @@ export class TopBarComponent {
       }
     })).subscribe();
   }
+
+  public goToCart() : void {
+    if (this.appService.loggedIn.value) {
+      this.appService.route("/cart-list");
+    }
+  }
+
+  public goToProducts() : void {
+    if (this.appService.loggedIn.value) {
+      this.appService.route("/product-list");
+    }
+  }
 }

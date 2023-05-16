@@ -25,10 +25,12 @@ export class ProductListItemComponent {
           throw new Error('No products were returned from add to cart operation!');
         }
 
+        cart.productList?.sort((a, b) => a.title!.localeCompare(b.title!));
+
         this.appService.shoppingCart.next(cart);
 
         this.appService.cartTotal.next(
-          cart.productList.map(prod => prod.price).reduce( (prev, next) => prev! + next!)!
+          cart.productList.map(prod => prod.price).reduce( (prev, next) => prev! + next!, 0.00)!
         )
         
         let length = cart.productList.length;

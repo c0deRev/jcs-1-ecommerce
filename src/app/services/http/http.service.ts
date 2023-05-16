@@ -74,6 +74,24 @@ export class HttpService {
       })).subscribe();
   }
 
+  public delete<Type>(httpData : HttpData, callback ?: HttpCallback) : void {
+    let endpoint = httpData.endpoint;
+    let headers  = httpData.headers;
+
+    this.http.delete<Type>(endpoint, { headers }).pipe(
+      tap({
+        next: (response) =>{          
+          callback?.next && callback.next(response);
+        },
+        error: (error) => {
+          callback?.error && callback.error(error);
+        },
+        complete: () => {
+          callback?.complete && callback.complete();
+        }
+      })).subscribe();
+  }
+
   public formPost<Type>(postData : PostData, callback ?: HttpCallback ) : void {
     postData.headers.set('Content-Type', 'application/x-www-form-urlencoded');
 
@@ -90,5 +108,11 @@ export class HttpService {
     httpData.headers.set('Content-Type', 'application/json');
 
     this.get(httpData, callback);
+  }
+
+  public jsonDelete<Type>(httpData : HttpData, callback ?: HttpCallback) : void {
+    httpData.headers.set('Content-Type', 'application/json');
+
+    this.delete(httpData, callback);
   }
 }

@@ -77,4 +77,9 @@ public class EcommerceCartServiceImpl implements EcommerceCartService {
 
         return checkout;
     }
+
+  @Override
+  public EcommerceCart deleteCartItem(Long productId, String username) {
+    return null;
+  }
 }
