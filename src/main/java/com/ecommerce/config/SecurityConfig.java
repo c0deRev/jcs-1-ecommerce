@@ -31,6 +31,7 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers(
                           "/product/all",
+                          "/cart",
                           "/cart/add/**",
                           "/checkout",
                           "/logout"

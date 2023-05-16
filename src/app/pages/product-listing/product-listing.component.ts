@@ -27,6 +27,6 @@ export class ProductListingComponent {
     }
 
     this.appService.getProductList(handler);
-    
+
   }
 }

@@ -6,12 +6,15 @@
       </p>
     </div>
     <div id="shopping-cart-icon">
+
       <div id="shopping-cart-total">
-        <p>{{ 0.00 | currency }}</p>
+        <p>{{ this.appService.cartTotal | async | currency }}</p>
       </div>
+
       <img
         alt="Shopping Cart Icon"
         src="/assets/shopping-cart.png">
+
     </div>
   </header>
   
