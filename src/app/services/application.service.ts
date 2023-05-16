@@ -70,4 +70,13 @@ export class ApplicationService {
   public deleteCartItem(product: Product, cartHandler : CartHandler) : void {
     this.cartService.removeCartItem(product.id!, cartHandler);
   }
+
+  public checkout(cartHandler ?: CartHandler){
+
+    this.cartService.checkout(cartHandler);
+    
+    this.shoppingCart.next(undefined);
+    this.cartNumItems.next(0);
+    this.cartTotal.next(0.00);
+  }
 }

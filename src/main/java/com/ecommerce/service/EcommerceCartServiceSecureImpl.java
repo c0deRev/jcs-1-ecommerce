@@ -70,12 +70,16 @@ public class EcommerceCartServiceSecureImpl implements EcommerceCartService {
 
         // : get the total of the users cart
 
-        Double total = this.findCartByUsername(username).getProductList()
+      EcommerceCart cart = this.findCartByUsername(username);
+        Double total = cart.getProductList()
                 .stream()
                 .map(EcommerceProduct::getPrice)
                 .reduce(Double::sum).orElseGet(() -> 0.00);
 
         checkout.setTotal(total);
+
+        // delete the checked out cart
+        this.ecommerceCartRepository.delete(cart);
 
         return checkout;
     }
