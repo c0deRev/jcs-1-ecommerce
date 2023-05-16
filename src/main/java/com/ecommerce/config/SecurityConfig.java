@@ -32,6 +32,7 @@ public class SecurityConfig {
                         .requestMatchers(
                           "/product/all",
                           "/cart",
+                          "/cart/*",
                           "/cart/add/**",
                           "/checkout",
                           "/logout"

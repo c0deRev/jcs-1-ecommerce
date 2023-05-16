@@ -121,6 +121,17 @@ public class EcommerceController {
         );
     }
 
+
+    @DeleteMapping("/cart/{id}")
+    public ResponseEntity<EcommerceCart> deleteCartItem(@PathVariable("id") Long productId){
+      // : add an item to a users cart
+      String username = ((Authentication) SecurityContextHolder.getContext().getAuthentication()).getName();
+      return ResponseEntity.ok(
+        this.ecommerceCartService.deleteCartItem(productId, username)
+      );
+    }
+
+
     /**
      * Retrieves the items in a user's cart and returns it as JSON list of products.
      * @return a {@link List} of {@link EcommerceProduct}

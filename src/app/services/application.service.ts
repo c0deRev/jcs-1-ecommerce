@@ -15,7 +15,7 @@ export class ApplicationService {
 
   loggedIn     = new BehaviorSubject<boolean>(false);
   
-  shoppingCart = new Subject<Cart>();
+  shoppingCart = new BehaviorSubject<Cart | undefined>(undefined);
 
   cartTotal    = new BehaviorSubject<number>(0.00);
 
@@ -65,5 +65,9 @@ export class ApplicationService {
 
   public getCart(cartHandler : CartHandler) : void  {
     this.cartService.getCart(cartHandler);
+  }
+
+  public deleteCartItem(product: Product, cartHandler : CartHandler) : void {
+    this.cartService.removeCartItem(product.id!, cartHandler);
   }
 }

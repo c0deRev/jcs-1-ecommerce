@@ -29,6 +29,8 @@ export class LoginFormComponent {
   private login() : void {
     this.appService.login(this.username!, this.password!, {
       success: () => {
+        this.appService.loggedIn.next(true);
+
         // load user data
         this.appService.getCart({
           success: (cart : Cart) => {
@@ -36,7 +38,7 @@ export class LoginFormComponent {
               this.appService.shoppingCart.next(cart);
 
               this.appService.cartTotal.next(
-                cart.productList.map(prod => prod.price).reduce( (prev, next) => prev! + next!)!
+              cart.productList.map(prod => prod.price).reduce( (prev, next) => prev! + next!, 0.00)!
               )
               
               let length = cart.productList.length;
