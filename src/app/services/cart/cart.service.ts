@@ -96,5 +96,35 @@ export class CartService {
     }
 
     this.httpService.jsonDelete(postData, callback);
-  } 
+  }
+
+  public checkout(cartHandler ?: CartHandler) : void {
+
+    let httpData = new HttpData();
+
+    httpData.endpoint = `/checkout`;
+
+
+    let callback = new HttpCallback();
+    
+    callback.next = (cart: Cart) => {
+      console.log("[Service] { CART } -> delete cart item success!");
+
+      cartHandler?.success && cartHandler.success(cart);
+    }
+    callback.error = (error: any) => {
+      console.log("[Service] { CART } -> delete cart item failure!");
+
+      cartHandler?.failure && cartHandler.failure(error);
+
+    }
+    callback.complete = () => {
+      console.log("[Service] { CART } -> delete cart item complete!");
+
+      cartHandler?.complete && cartHandler.complete();
+
+    }
+
+    this.httpService.jsonGet(httpData, callback);
+  }
 }

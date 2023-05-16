@@ -26,10 +26,19 @@ export class CartListingComponent {
     })).subscribe();
   }
 
+  public checkout() : void {
+    this.appService.checkout({
+      success: (total : number) => {
+        // do something with the checkout price here
+      }
+    });
+    this.productList = [];
+  }
+
   public removeItem(product : Product, index : number) : void {
     this.appService.deleteCartItem(product, {
       success: (cart : Cart) => {
-        
+
         cart.productList?.sort((a, b) => a.title!.localeCompare(b.title!));
 
         this.appService.shoppingCart.next(cart);

@@ -3,6 +3,7 @@
         <button
             *ngIf="this.appService.cartNumItems.value > 0"
             onclick="document.getElementById('id01').style.display='block'"
+            (click)="checkout()"
             class="theme-button-primary"
             type="button"
             value="checkout"
