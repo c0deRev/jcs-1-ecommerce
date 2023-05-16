@@ -13,6 +13,7 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { ProductListingComponent } from './pages/product-listing/product-listing.component';
 import { FormSingleInputComponent } from './components/form/form-single-input/form-single-input.component';
 import { ProductListItemComponent } from './components/product/product-list-item/product-list-item.component';
+import { CartListingComponent } from './pages/cart-listing/cart-listing.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProductListItemComponent } from './components/product/product-list-item
     LandingPageComponent,
     ProductListingComponent,
     FormSingleInputComponent,
-    ProductListItemComponent
+    ProductListItemComponent,
+    CartListingComponent
   ],
   imports: [
     BrowserModule,
