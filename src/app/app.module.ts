@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { ProductListingComponent } from './pages/product-listing/product-listing.component';
 import { FormSingleInputComponent } from './components/form/form-single-input/form-single-input.component';
+import { ProductListItemComponent } from './components/product/product-list-item/product-list-item.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FormSingleInputComponent } from './components/form/form-single-input/fo
     TopBarComponent,
     LandingPageComponent,
     ProductListingComponent,
-    FormSingleInputComponent
+    FormSingleInputComponent,
+    ProductListItemComponent
   ],
   imports: [
     BrowserModule,

@@ -36,25 +36,25 @@ export class HttpService {
   }
 
 
-  public get<Type>(httpData : HttpData, callback : HttpCallback) : void {
+  public get<Type>(httpData : HttpData, callback ?: HttpCallback) : void {
     let endpoint = httpData.endpoint;
     let headers  = httpData.headers;
 
     this.http.get<Type>(endpoint, { headers }).pipe(
       tap({
         next: (response) =>{          
-          callback.next && callback.next(response);
+          callback?.next && callback.next(response);
         },
         error: (error) => {
-          callback.error && callback.error(error);
+          callback?.error && callback.error(error);
         },
         complete: () => {
-          callback.complete && callback.complete();
+          callback?.complete && callback.complete();
         }
       })).subscribe();
   }
 
-  public post<Type>(postData : PostData, callback : HttpCallback) : void {
+  public post<Type>(postData : PostData, callback ?: HttpCallback) : void {
 
     const headers   = postData.headers;
     const params    = postData.params ? postData.params : postData.data;
@@ -63,26 +63,32 @@ export class HttpService {
     this.http.post<Type>(endpoint, params, { headers }).pipe(
       tap({
         next: (response) => {
-          callback.next && callback.next(response);
+          callback?.next && callback.next(response);
         },
         error: (error) => {
-          callback.error && callback.error(error);
+          callback?.error && callback.error(error);
         },
         complete: () => {
-          callback.complete && callback.complete();
+          callback?.complete && callback.complete();
         }
       })).subscribe();
   }
 
-  public formPost<Type>(postData : PostData, callback : HttpCallback ) : void {
+  public formPost<Type>(postData : PostData, callback ?: HttpCallback ) : void {
     postData.headers.set('Content-Type', 'application/x-www-form-urlencoded');
 
     this.post<Type>(postData, callback);
   }
 
-  public jsonPost<Type>(postData : PostData, callback : HttpCallback ) : void {
+  public jsonPost<Type>(postData : PostData, callback ?: HttpCallback ) : void {
     postData.headers.set('Content-Type', 'application/json');
 
     this.post<Type>(postData, callback);
+  }
+
+  public jsonGet<Type>(httpData : HttpData, callback ?: HttpCallback) : void {
+    httpData.headers.set('Content-Type', 'application/json');
+
+    this.get(httpData, callback);
   }
 }

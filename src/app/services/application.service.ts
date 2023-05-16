@@ -2,16 +2,25 @@ import { Injectable } from '@angular/core';
 import { LoginCredentials, LoginHandler, LoginService } from './account/login.service';
 import { Router } from '@angular/router';
 import { RegisterCredentials, RegisterHandler, RegisterService } from './account/register.service';
+import { ProductListHandler, ProductListService } from './product/product-list.service';
+import { Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApplicationService {
 
+  loggedIn     : boolean = false;
+  
+  shoppingCart : Product[] = [];
+
+  cartTotal : number = 0.00;
+
   constructor(
-    private loginService    : LoginService,
-    private registerService : RegisterService,
-    private routerService   : Router
+    private loginService        : LoginService,
+    private registerService     : RegisterService,
+    private productListService  : ProductListService,
+    private routerService       : Router
     ) { }
 
   public route(endpoint : string){
@@ -38,5 +47,9 @@ export class ApplicationService {
     };
 
     this.registerService.register(credentials, registerHandler);
+  }
+
+  public getProductList(productListHandler : ProductListHandler) : void {
+    this.productListService.getAllProducts(productListHandler);
   }
 }

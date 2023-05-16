@@ -27,7 +27,7 @@ export class LoginService {
 
     postData.setParams(new HttpParams().set("username", credentials.username).set("password", credentials.password));
 
-    let callback = new HttpCallback;
+    let callback = new HttpCallback();
     callback.next = (response : any) => {
       console.log("[Service] { LOGIN } -> login success!");
 

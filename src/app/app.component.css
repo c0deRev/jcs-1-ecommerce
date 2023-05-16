@@ -29,8 +29,16 @@ router-outlet {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    padding-top: 2em;
 }
 
+app-top-bar {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 10000;
+    box-shadow: black 0px 2px 2px;
+}
 
 app-landing-page {
     display: flex;
