@@ -3,6 +3,6 @@ import { User } from "./user";
 
 export interface Cart {
     id          ?: number;
-    products    ?: Product[];
+    productList    ?: Product[];
     cartOwner   ?: User;
 }

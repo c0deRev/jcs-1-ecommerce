@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { tap } from 'rxjs';
+import { ApplicationService } from 'src/app/services/application.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -7,6 +9,9 @@ import { Component } from '@angular/core';
 })
 export class LandingPageComponent {
   showLogin : boolean = true;
+
+  constructor(private appService : ApplicationService){}
+  
   public swap(){
     this.showLogin = !this.showLogin;
   }
@@ -19,5 +24,16 @@ export class LandingPageComponent {
       this.showLogin = true;
       this.showLogin = false;
     }
+  }
+
+  ngOnInit(){
+    // route user to product page if already logged in
+    this.appService.loggedIn.pipe(tap({
+      next: (isLoggedIn : boolean) => {
+        if(isLoggedIn) {
+          this.appService.route("product-list");
+        }
+      }
+    })).subscribe();
   }
 }

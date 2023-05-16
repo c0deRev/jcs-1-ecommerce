@@ -13,7 +13,9 @@
             <p><span>PRICE: </span> {{product?.price}}</p>
         </div>
         <div id="buy-button">
-            <button class="theme-button-primary">BUY</button>
+            <button 
+                (click)="addToCart()"
+                class="theme-button-primary">BUY</button>
         </div>
     </div>
 </section>

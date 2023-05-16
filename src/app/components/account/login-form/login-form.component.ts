@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { tap } from 'rxjs';
+import { Cart } from 'src/app/models/cart';
 import { ApplicationService } from 'src/app/services/application.service';
 
 type LoginFormState = "username" | "password";
@@ -20,12 +22,32 @@ export class LoginFormComponent {
 
   constructor(
     private appService: ApplicationService
-  ){}
+  ){
+  }
   
 
   private login() : void {
     this.appService.login(this.username!, this.password!, {
       success: () => {
+        // load user data
+        this.appService.getCart({
+          success: (cart : Cart) => {
+            if (cart.productList) {
+              this.appService.shoppingCart.next(cart);
+
+              this.appService.cartTotal.next(
+                cart.productList.map(prod => prod.price).reduce( (prev, next) => prev! + next!)!
+              )
+              
+              let length = cart.productList.length;
+              console.log(length);
+      
+              this.appService.cartNumItems.next(length);
+            }
+          }
+        });
+        
+        // re-route the user to the product list
         this.appService.route("product-list");
       },
       failure: () => {

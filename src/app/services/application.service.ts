@@ -4,22 +4,28 @@ import { Router } from '@angular/router';
 import { RegisterCredentials, RegisterHandler, RegisterService } from './account/register.service';
 import { ProductListHandler, ProductListService } from './product/product-list.service';
 import { Product } from '../models/product';
+import { CartHandler, CartService } from './cart/cart.service';
+import { Cart } from '../models/cart';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApplicationService {
 
-  loggedIn     : boolean = false;
+  loggedIn     = new BehaviorSubject<boolean>(false);
   
-  shoppingCart : Product[] = [];
+  shoppingCart = new Subject<Cart>();
 
-  cartTotal : number = 0.00;
+  cartTotal    = new BehaviorSubject<number>(0.00);
+
+  cartNumItems = new BehaviorSubject<number>(0);
 
   constructor(
     private loginService        : LoginService,
     private registerService     : RegisterService,
     private productListService  : ProductListService,
+    private cartService         : CartService,
     private routerService       : Router
     ) { }
 
@@ -51,5 +57,13 @@ export class ApplicationService {
 
   public getProductList(productListHandler : ProductListHandler) : void {
     this.productListService.getAllProducts(productListHandler);
+  }
+
+  public addToCart(product : Product, cartHandler : CartHandler) : void {
+    this.cartService.addItemToCart(product.id!, cartHandler);
+  }
+
+  public getCart(cartHandler : CartHandler) : void  {
+    this.cartService.getCart(cartHandler);
   }
 }
