@@ -12,7 +12,20 @@
     box-shadow: #000000e5 0 0 3px 1px;
 }
 
+#checkout-container {
+    border-radius: 1em;
+}
+
 #total {
     text-align: center;
     padding: 1em;
+}
+
+#id01 {
+    border-radius: 1em;
+    background-color: hsla(0, 50%, 0%, 60%);
+}
+
+#checkout-exit-button {
+    border-top-right-radius: 1em;
 }

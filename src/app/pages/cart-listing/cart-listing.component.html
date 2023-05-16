@@ -1,6 +1,8 @@
 <div id="container">
     <div id="checkout">
         <button
+            *ngIf="this.appService.cartNumItems.value > 0"
+            onclick="document.getElementById('id01').style.display='block'"
             class="theme-button-primary"
             type="button"
             value="checkout"
@@ -22,3 +24,18 @@
         <p>TOTAL: {{this.appService.cartTotal | async | currency }}</p>
     </div>
 </div>
+
+ 
+ <!-- The Modal -->
+ <div id="id01" class="w3-modal">
+   <div id="checkout-container" class="w3-modal-content">
+     <div class="w3-container">
+       <span id="checkout-exit-button" onclick="document.getElementById('id01').style.display='none'"
+       class="w3-button w3-display-topright">&times;</span>
+       <section>
+        <h2 class="w3-panel w3-center w3-padding-16">Thank You!</h2>
+        <p class="w3-center w3-padding-16">Your order is on its way</p>
+       </section>
+     </div>
+   </div>
+ </div> 
