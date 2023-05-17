@@ -22,6 +22,8 @@ public class SecurityConfig {
                         .requestMatchers(
                   "/register",
                           "/",
+                          "/cart-list",
+                          "/product-list",
                           "/*.css",
                           "/*.js",
                           "/index.html",
@@ -30,6 +32,7 @@ public class SecurityConfig {
                         )
                         .permitAll()
                         .requestMatchers(
+                          "/user",
                           "/product/all",
                           "/cart",
                           "/cart/*",

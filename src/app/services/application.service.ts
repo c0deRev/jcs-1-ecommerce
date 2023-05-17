@@ -79,4 +79,12 @@ export class ApplicationService {
     this.cartNumItems.next(0);
     this.cartTotal.next(0.00);
   }
+
+  public preAuthenticate(loginHandler : LoginHandler) : void {
+    this.loginService.authenticate(loginHandler);
+  }
+
+  public logout(loginHandler : LoginHandler) : void {
+    this.loginService.logout(loginHandler);
+  }
 }

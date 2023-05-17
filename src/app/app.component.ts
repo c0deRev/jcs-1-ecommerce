@@ -10,5 +10,10 @@ export class AppComponent {
   title = 'client';
 
   constructor(private appService : ApplicationService) {
+    this.appService.preAuthenticate({
+      success: () => {
+        this.appService.loggedIn.next(true);
+      }
+    })
   }
 }

@@ -4,6 +4,7 @@
     height: 20em;
     display: block;
     background: black;
+    text-align: center;
   }
 
 .product-list-item h4 {
@@ -32,5 +33,9 @@
 }
 
 #buy-button {
+    text-align: center;
+}
+
+h2 {
     text-align: center;
 }
