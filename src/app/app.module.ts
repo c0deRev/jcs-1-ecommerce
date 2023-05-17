@@ -14,6 +14,7 @@ import { ProductListingComponent } from './pages/product-listing/product-listing
 import { FormSingleInputComponent } from './components/form/form-single-input/form-single-input.component';
 import { ProductListItemComponent } from './components/product/product-list-item/product-list-item.component';
 import { CartListingComponent } from './pages/cart-listing/cart-listing.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { CartListingComponent } from './pages/cart-listing/cart-listing.componen
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
