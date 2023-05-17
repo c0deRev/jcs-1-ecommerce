@@ -1,0 +1,33 @@
+
+router-outlet {
+    display: none;
+}
+
+#container {
+    min-height: 30em;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.bg-image {
+    background-image: url(/assets/landing-page-bg.png);
+    background-size: cover;
+    background-position: right;
+    background-repeat: no-repeat;
+    width: 100%;
+    filter: blur(8px);
+    -webkit-filter: blur(3px);
+    height: 100%;
+    position: fixed;
+    z-index: -1;
+}
+
+app-footer {
+    z-index: 1;
+}
+
+app-side-nav-toolbar {
+    flex-grow: 1;
+}

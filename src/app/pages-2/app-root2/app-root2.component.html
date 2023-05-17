@@ -1,0 +1,12 @@
+
+<div id="container">
+
+    <app-side-nav-toolbar
+        [hideSideBar]="(this.appService.loggedIn | async) === false"
+        ></app-side-nav-toolbar>
+
+    <app-footer></app-footer>
+  
+</div>
+  
+  

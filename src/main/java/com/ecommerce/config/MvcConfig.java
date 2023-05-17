@@ -22,6 +22,14 @@ public class MvcConfig implements WebMvcConfigurer {
     registry
       .addViewController("/")
       .setViewName("index");
+
+    registry
+      .addViewController("/cart-list")
+      .setViewName("index");
+
+    registry
+      .addViewController("/product-list")
+      .setViewName("index");
   }
 
   @Override
