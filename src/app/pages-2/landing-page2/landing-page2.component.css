@@ -22,4 +22,6 @@
 app-register-form2,
 app-login-form2 {
     padding: 1em;
+    height: 100%;
+    display: block;
   }
