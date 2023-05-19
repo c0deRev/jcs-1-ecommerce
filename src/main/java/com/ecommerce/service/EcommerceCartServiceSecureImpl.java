@@ -70,13 +70,51 @@ public class EcommerceCartServiceSecureImpl implements EcommerceCartService {
 
         // : get the total of the users cart
 
-        Double total = this.findCartByUsername(username).getProductList()
+      EcommerceCart cart = this.findCartByUsername(username);
+        Double total = cart.getProductList()
                 .stream()
                 .map(EcommerceProduct::getPrice)
                 .reduce(Double::sum).orElseGet(() -> 0.00);
 
         checkout.setTotal(total);
 
+        // delete the checked out cart
+        this.ecommerceCartRepository.delete(cart);
+
         return checkout;
     }
+
+  @Override
+  public EcommerceCart deleteCartItem(Long productId, String username) {
+
+    EcommerceUser user = this.ecommerceUserService.findByUsername(username);
+
+    // : get the current cart owned by the user
+
+    // : --- if it does not exist create it
+
+    Optional<EcommerceCart> cart = this.ecommerceCartRepository.findCartByUsername(username);
+
+    if (cart.isEmpty()) {
+      cart = Optional.of(new EcommerceCart());
+    }
+
+    // : add the item to the cart
+
+    // : --- get a reference to the item
+
+    // this throws an exception if the product is not found
+    EcommerceProduct product = this.ecommerceProductService.getProductById(productId);
+
+    // : --- add the product to the cart
+    if (Optional.ofNullable(cart.get().getProductList()).isEmpty()){
+      cart.get().setProductList(new ArrayList<>());
+    }
+
+    cart.get().getProductList().remove(product);
+    cart.get().setCartOwner(user);
+
+    // : save and return the cart
+    return this.ecommerceCartRepository.save(cart.get());
+  }
 }

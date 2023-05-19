@@ -1,0 +1,41 @@
+
+
+.product-list-item img {
+    height: 20em;
+    display: block;
+    background: black;
+    text-align: center;
+  }
+
+.product-list-item h4 {
+    text-align: center;
+    padding: 1em;
+    font-family: Montserrat,sans-serif;
+}
+
+#description {
+    padding: .5em;
+    text-align: center;
+    line-height: 2em;
+}
+
+#prod-price {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1em;
+    margin-bottom: 2em;
+}
+
+#price {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+#buy-button {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}

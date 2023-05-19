@@ -1,0 +1,38 @@
+
+<div id="container">
+    <section
+    *ngIf="showLogin" 
+    >
+        <h3 id="login-form-title">LOGIN</h3>
+        <hr/>
+        <app-login-form 
+        class="landing-page-form"
+        ></app-login-form>
+
+    </section>
+
+    <section 
+    *ngIf="!showLogin" 
+    >
+        <h3>REGISTER</h3>
+        <hr/>
+        <app-register-form
+        (onRegister)="registerHandler($event)"
+        class="landing-page-form"
+        ></app-register-form>
+    </section>
+
+    <div id="form-swap-button">
+        <span 
+            *ngIf="!showLogin"
+            class="theme-secondary-button" 
+            (click)="swap()"
+            >cancel</span>
+
+        <span  
+            *ngIf="showLogin"
+            class="theme-secondary-button" 
+            (click)="swap()"
+            >register</span>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<div
+    *ngIf="shouldShowInput" 
+>
+    <form 
+    role="form" 
+    [formGroup]="formGroup" 
+    (ngSubmit)="emit()" 
+    [attr.aria-label]="labelName"
+    >
+
+    <div 
+    class="input"
+    >
+
+    <label 
+        for="text-input" 
+        class="theme-primary-label"
+        >
+        {{labelName}}
+    </label>
+
+    <input 
+        id="text-input" 
+        [type]="inputType" 
+        [placeholder]="inputPlaceholder" 
+        formControlName="input"
+        class="theme-primary-input"
+        >
+    </div>
+        <button class="theme-button-primary" type="submit" [value]="buttonValue">{{buttonName}}</button>
+    </form>
+</div>
+
+

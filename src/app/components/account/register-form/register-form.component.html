@@ -1,0 +1,42 @@
+<section id="register-container">
+    <div id="register-form">
+
+      <app-form-single-input
+        [shouldShowInput]="registerFormState== 'email'"
+        [buttonName]="'next'"
+        [buttonValue]="'register-email'"
+        [inputPlaceholder]="'email'"
+        [inputType]="'email'"
+        [labelName]="'E-MAIL'"
+        (onSubmit)="submitEmail($event)"
+
+      >
+      </app-form-single-input>
+
+
+      <app-form-single-input
+      [shouldShowInput]="registerFormState == 'password'"
+      [buttonName]="'submit'"
+      [buttonValue]="'register-password'"
+      [inputPlaceholder]="'password'"
+      [inputType]="'password'"
+      [labelName]="'PASSWORD'"
+      (onSubmit)="submitPassword($event)"
+
+    >
+    </app-form-single-input>
+
+
+    <app-form-single-input
+    [shouldShowInput]="registerFormState == 'username'"
+    [buttonName]="'next'"
+    [buttonValue]="'register-user'"
+    [inputPlaceholder]="'username'"
+    [inputType]="'text'"
+    [labelName]="'USERNAME'"
+    (onSubmit)="submitUsername($event)"
+
+  >
+  </app-form-single-input>
+    </div>
+  </section>

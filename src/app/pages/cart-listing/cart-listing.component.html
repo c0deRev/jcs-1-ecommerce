@@ -1,0 +1,42 @@
+<div id="container">
+    <div id="checkout">
+        <button
+            *ngIf="this.appService.cartNumItems.value > 0"
+            onclick="document.getElementById('id01').style.display='block'"
+            (click)="checkout()"
+            class="theme-button-primary"
+            type="button"
+            value="checkout"
+            >Checkout</button>
+    </div>
+    <table class="w3-table">
+        <tr>
+          <th>Product Name</th>
+          <th>Price</th>
+          <th>Modify</th>
+        </tr>
+        <tr *ngFor="let product of this.productList; let i = index">
+          <td>{{product.title}}</td>
+          <td>{{product.price | currency}}</td>
+          <td><button (click)="removeItem(product, i)">remove</button></td>
+        </tr>
+    </table>
+    <div id="total">
+        <p>TOTAL: {{this.appService.cartTotal | async | currency }}</p>
+    </div>
+</div>
+
+ 
+ <!-- The Modal -->
+ <div id="id01" class="w3-modal">
+   <div id="checkout-container" class="w3-modal-content">
+     <div class="w3-container">
+       <span id="checkout-exit-button" onclick="document.getElementById('id01').style.display='none'"
+       class="w3-button w3-display-topright">&times;</span>
+       <section>
+        <h2 class="w3-panel w3-center w3-padding-16">Thank You!</h2>
+        <p class="w3-center w3-padding-16">Your order is on its way</p>
+       </section>
+     </div>
+   </div>
+ </div> 

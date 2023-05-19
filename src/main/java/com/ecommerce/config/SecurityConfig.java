@@ -1,4 +1,4 @@
-package com.ecommerce.security;
+package com.ecommerce.config;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
@@ -20,14 +20,25 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth ->
                     auth
                         .requestMatchers(
-                                "/register"
+                  "/register",
+                          "/",
+                          "/cart-list",
+                          "/product-list",
+                          "/*.css",
+                          "/*.js",
+                          "/index.html",
+                          "/favicon.ico",
+                          "/assets/**"
                         )
                         .permitAll()
                         .requestMatchers(
-                                "/product/all",
-                                "/cart/add/**",
-                                "/checkout",
-                                "/logout"
+                          "/user",
+                          "/product/all",
+                          "/cart",
+                          "/cart/*",
+                          "/cart/add/**",
+                          "/checkout",
+                          "/logout"
                         )
                         .hasRole("USER")
                 )
@@ -45,7 +56,7 @@ public class SecurityConfig {
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                 )
-                .csrf((csrf) -> csrf
+                .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/**")
                 ).build();
     }

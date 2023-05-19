@@ -29,4 +29,6 @@ public interface EcommerceCartService {
      * @return {@link EcommerceCheckout} containing the total of the owning user's cart
      */
     EcommerceCheckout checkout(String username);
+
+  EcommerceCart deleteCartItem(Long productId, String username);
 }

@@ -1,0 +1,27 @@
+
+<header id="header">
+    <div id="title">
+      <p>
+        <span
+        (click)="goToProducts()">
+          RETRO SHOP
+        </span>
+      </p>
+    </div>
+    <div id="shopping-cart-icon">
+
+      <div id="shopping-cart-total">
+        <p>{{ this.appService.cartTotal | async | currency }}</p>
+      </div>
+
+      <span
+      (click)="goToCart()"
+      >
+        <img
+        alt="Shopping Cart Icon"
+        src="/assets/shopping-cart.png">
+      </span>
+      
+    </div>
+  </header>
+  

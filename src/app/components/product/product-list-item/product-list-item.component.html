@@ -1,0 +1,21 @@
+<section class="product-list-item">
+    <h2>{{product?.title}}</h2>
+    <img
+        [alt]="product?.title"
+        [src]="product?.imageUrl">
+    <div id="description">
+        <p>
+            {{product?.description}}
+        </p>
+    </div>
+    <div id="prod-price">
+        <div id="price">
+            <p><span>PRICE: </span> {{product?.price}}</p>
+        </div>
+        <div id="buy-button">
+            <button 
+                (click)="addToCart()"
+                class="theme-button-primary">BUY</button>
+        </div>
+    </div>
+</section>

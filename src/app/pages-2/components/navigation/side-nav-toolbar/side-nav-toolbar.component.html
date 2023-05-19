@@ -1,0 +1,68 @@
+<mat-sidenav-container class="sidenav-container">
+  
+  <!-- SIDENAV -->
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="'over'"
+      [opened]="false"
+      >
+    
+    <!-- SIDE NAV HEADER -->
+    <mat-toolbar>Menu</mat-toolbar>
+
+    <!-- SIDE NAV LIST ELEMENTS -->
+    <mat-nav-list>
+      <a mat-list-item routerLink="" (click)="logout()" (click)="drawer.toggle()">Logout</a>
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <!-- Content Section -->
+  <mat-sidenav-content>
+    <div class="bg-image"></div>
+
+    <!-- CONTENT TOOLBAR -->
+    <mat-toolbar
+      id="toolbar"
+      color="primary">
+      <div>
+        <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf=" this.hideSideBar === false ">
+
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      
+      <span (click)="goToProducts()" id="title">RETRO SHOP</span>
+      </div>
+
+      <div id="shopping-cart-icon">
+
+        <div id="shopping-cart-total">
+          <p>{{ this.appService.cartTotal | async | currency }}</p>
+        </div>
+  
+        <span
+        (click)="goToCart()"
+        >
+          <img
+          alt="Shopping Cart Icon"
+          src="/assets/shopping-cart.png">
+        </span>
+        
+      </div>
+    </mat-toolbar>
+
+    <!-- ROUTER -->
+    <!-- Add Content Here -->
+    <div id="content">
+      <div id="router">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
