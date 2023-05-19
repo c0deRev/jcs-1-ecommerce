@@ -1,32 +1,20 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SideNavToolbarComponent } from './side-nav-toolbar.component';
+import { AppModule } from 'src/app/app.module';
 
 describe('SideNavToolbarComponent', () => {
   let component: SideNavToolbarComponent;
   let fixture: ComponentFixture<SideNavToolbarComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [SideNavToolbarComponent],
-      imports: [
-        NoopAnimationsModule,
-        MatButtonModule,
-        MatIconModule,
-        MatListModule,
-        MatSidenavModule,
-        MatToolbarModule,
-      ]
-    }).compileComponents();
-  }));
 
-  beforeEach(() => {
+  beforeEach(async () => {
+
+    await TestBed.configureTestingModule({
+      imports: [AppModule],
+      // other necessary configurations
+    }).compileComponents();
+    
     fixture = TestBed.createComponent(SideNavToolbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
